@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TicTacToe</title>
+    <link rel="stylesheet" href="/css/projects/day2/style.css" />
+  </head>
+  <body>
+    <div id="floatingButton">
+      <a href="/">메인 페이지</a>
+    </div>
+    <div id="wrap">
+      <div class="header">
+        <div class="tit">
+          <h1>Tic Tac Toe</h1>
+        </div>
+        <div class="scoreboard">
+          <div class="score-item">
+            <span class="score-label">computer</span>
+            <span class="score-num">0</span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">ties</span>
+            <span class="score-num">0</span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">player</span>
+            <span class="score-num">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="footer">Restart game</div>
+    </div>
+    <script type="text/javascript">
+      const table = new Array(9).fill(0);
+      const accumulatedResult = new Array(3).fill(0);
+      let putLoading = false;
+
+      const tableBoxes = document.querySelectorAll(".container div");
+      const scoreBoxes = document.querySelectorAll(".scoreboard .score-num");
+
+      const resetButton = document.querySelector(".footer");
+
+      document.addEventListener("DOMContentLoaded", initialStart);
+
+      function restartGame() {
+        table.fill(0);
+        tableBoxes.forEach((box) => {
+          box.innerHTML = "";
+        });
+      }
+
+      function resetGame() {
+        restartGame();
+        accumulatedResult.fill(0);
+        scoreBoxes.forEach((box) => {
+          box.innerHTML = 0;
+        });
+      }
+
+      function chkIfGameSet() {
+        for (let i = 0; i < 3; i++) {
+          // horizontal
+          if (
+            table[i * 3] !== 0 &&
+            table[i * 3] === table[i * 3 + 1] &&
+            table[i * 3] === table[i * 3 + 2]
+          ) {
+            return table[i * 3];
+          }
+          // vertical
+          if (
+            table[i] !== 0 &&
+            table[i] === table[i + 3] &&
+            table[i] === table[i + 6]
+          ) {
+            return table[i];
+          }
+        }
+
+        // diagonal
+        if (table[0] !== 0 && table[0] === table[4] && table[0] === table[8]) {
+          return table[0];
+        } else if (
+          table[2] !== 0 &&
+          table[2] === table[4] &&
+          table[2] === table[6]
+        ) {
+          return table[2];
+        }
+
+        // do not match those statement
+        // and full enough to put in
+        if (table.filter((item) => item === 0).length === 0) {
+          return 3; // ties
+        }
+
+        return 0;
+      }
+
+      function showOrNotIsGameOver(callback) {
+        const gameResult = chkIfGameSet();
+        let msg = "";
+
+        if (gameResult) {
+          putLoading = true;
+          if (gameResult === 1) {
+            // user won
+            scoreBoxes[2].innerHTML = ++accumulatedResult[2];
+            msg = "You Won!";
+          } else if (gameResult === 2) {
+            // pc won
+            scoreBoxes[0].innerHTML = ++accumulatedResult[0];
+            msg = "PC Won!";
+          } else {
+            // ties
+            scoreBoxes[1].innerHTML = ++accumulatedResult[1];
+            msg = "Ties!";
+          }
+          setTimeout(() => {
+            alert(msg);
+            restartGame();
+            putLoading = false;
+          }, 100);
+        } else {
+          callback();
+        }
+        console.log(table);
+      }
+
+      function showUpdatedTable(idx, agent, callback = () => {}) {
+        const targetCell = document.querySelector(
+          `.container div:nth-of-type(${idx + 1})`
+        );
+
+        targetCell.innerHTML = agent === "user" ? "x" : "o";
+        showOrNotIsGameOver(callback);
+      }
+
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+      /**
+       * Computer put its turn on the table randomly against the player.
+       */
+      function putValueAgainst() {
+        putLoading = true;
+
+        let remainingCellsIdx = [];
+        table.forEach((cell, i) => {
+          if (cell === 0) remainingCellsIdx.push(i);
+        });
+        const targetIdx =
+          remainingCellsIdx[getRandomInt(remainingCellsIdx.length)];
+        table[targetIdx] = 2;
+
+        setTimeout(() => {
+          showUpdatedTable(targetIdx, "pc");
+          putLoading = false;
+        }, 1000);
+      }
+
+      /**
+       * Check if a table cell is not occupied.
+       * @param {number} i
+       */
+      function chkIfValueNotExists(i) {
+        if (table[i] !== 0) return false;
+
+        return true;
+      }
+
+      function initialStart() {
+        tableBoxes.forEach((box, i) => {
+          box.addEventListener("click", () => {
+            if (putLoading) return;
+            if (chkIfValueNotExists(i)) {
+              table[i] = 1;
+            } else return;
+            showUpdatedTable(i, "user", putValueAgainst);
+          });
+        });
+
+        resetButton.addEventListener("click", resetGame);
+      }
+    </script>
+  </body>
+</html>

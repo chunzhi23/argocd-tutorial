@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  height: 100vh;  
+  background-color: #eee;
+  font-family: "Pretendard", Arial, Helvetica, sans-serif;
+}
+
+#floatingButton {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.pl-txt {
+  text-decoration: none;
+  color: #000;
+}
+
+.header {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  font-family: "Pretendard", Arial, Helvetica, sans-serif;
+  background-color: #f1f1f1;
+}
+
+#floatingButton {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.container {
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#wrap {
+  height: 100vh;
+}
+
+#boxInputForm {
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+#boxInputForm h1 {
+  text-align: center;
+}
+
+.form-alert {
+  margin: 15px 0;
+  border-color: #f5c6cb;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.form-item {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.form-item label {
+  margin-right: 10px;
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+}
+
+.form-item input,
+.form-item select {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  box-sizing: content-box;
+  height: 24px;
+  line-height: 24px;
+}
+
+.form-footer {
+  margin: 10px 0;
+  text-align: right;
+}
+
+#boxShowList {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  flex: 1;
+}
+
+.list-head {
+  font-weight: 600;
+}
+
+.list-row {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.list-body .list-row:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+.list-item {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.list-item:nth-of-type(1),
+.list-item:nth-of-type(2) {
+  width: 60px;
+  text-align: center;
+}
+.list-item:nth-of-type(3) {
+  width: calc(100% - 240px);
+}
+.list-item:nth-of-type(4) {
+  width: 100px;
+  text-align: right;
+}

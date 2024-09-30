@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>학점 이수 계획 추가</title>
+    <link rel="stylesheet" href="/css/projects/day1/style.css" />
+    <link rel="stylesheet" href="/css/projects/day1/media.css" />
+  </head>
+  <style>
+    form {
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    form > div {
+      margin: 5px 0;
+    }
+  </style>
+  <body>
+    <div id="floatingButton">
+      <a href="/">메인 페이지</a>
+    </div>
+    <div id="wrap">
+      <div class="header">
+        <a class="pl-txt" href="https://www.skku.edu/skku" target="_blank">
+          <img
+            id="skkuLogoImg"
+            src="/img/skku_logo.png"
+            alt="성균관대학교 로고"
+          />
+        </a>
+        <h1><a class="pl-txt" href="#">학점 이수 계획</a></h1>
+      </div>
+      <div class="container">
+        <form method="post">
+          <div>
+            <label for="InputSubjectName">과목명: </label>
+            <input id="InputSubjectName" type="text" name="subject" />
+          </div>
+          <div>
+            <label for="InputDivision1">구분1: </label>
+            <input id="InputDivision1Major" type="radio" name="division1" value="major" />
+            <label for="InputDivision1Major">전공</label>
+            <input id="InputDivision1Librarl" type="radio" name="division1" value="liberal" />
+            <label for="InputDivision1Librarl">교양</label>
+          </div>
+          <div>
+            <label for="SelectDivision2">구분2</label>
+            <select name="division2" id="SelectDivision2">
+              <option value="majorRequired">전공코어</option>
+              <option value="majorDeepen">전공심화</option>
+              <option value="majorExercise">전공실습</option>
+              <option value="global">글로벌</option>
+              <option value="DSBase">DS기반</option>
+              <option value="conversation">의사소통</option>
+              <option value="creative">창의</option>
+            </select>
+          </div>
+          <div>
+            <label for="InputGrade">학점: </label>
+            <input id="InputGrade" type="number" name="grade" />
+          </div>
+          <div>
+            <button type="submit">추가하기</button>
+          </div>
+        </form>
+        <div>
+          <a href="/project/1">메인으로</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
